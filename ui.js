@@ -140,6 +140,18 @@ UI.UIElement = function(DOMElements){
     return this
   }
 
+  this.map = function(fn){
+    return this.getElements().map(function(e){
+      return fn.call(e, UI.wrap(e), e)
+    })
+  }
+
+  this.getClass = function(){
+    return this.getElements().map(function(e){
+      return UI.getClass(e)
+    })
+  }
+
   return this
 }
 
@@ -222,7 +234,7 @@ UI.removeClass = function(el, clss){
   return el
 }
 
-// AÃ±ade una clase a un elemento
+// Añade una clase a un elemento
 UI.addClass = function(el, clss){
   if(UI.hasClass(el, clss)) return el
   el.className += ' ' + clss
@@ -230,16 +242,18 @@ UI.addClass = function(el, clss){
   return el
 }
 
+UI.getClass = function(el){
+  return el.className.split(' ')
+}
+
 // Deshabilita un elemento
 UI.disable = function(el){
-  // UI.addClass('disabled')
   el.setAttribute('disabled', true)
   return el
 }
 
 // Habilita un elemento
 UI.enable = function(el){
-  // UI.removeClass('disabled')
   el.removeAttribute('disabled')
   return el
 }
