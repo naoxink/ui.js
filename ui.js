@@ -118,6 +118,12 @@ UI.UIElement = function(DOMElements){
     }
     return this
   }
+  
+  this.getStyle = function(key){
+    return this.getElements().map(function(dome){
+      return window.getComputedStyle(elem, null).getPropertyValue(key)
+    })
+  }
 
   this.hasClass = function(clss){
     var results = this.getElements().map(function(dome){
